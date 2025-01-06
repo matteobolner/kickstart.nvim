@@ -27,9 +27,9 @@ return {
         --terminal_height = 10, --# change the terminal display option height (if horizontal)
       }, -- your options
     }
-    vim.api.nvim_set_keymap('v', '<leader>r', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>r', '<Plug>SnipRun', { silent = true })
-    vim.api.nvim_set_keymap('n', '<leader>f', '<Plug>SnipRunOperator', { silent = true })
+    vim.api.nvim_set_keymap('v', '<leader>r', '<Plug>SnipRun`>j', { silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>r', '<Plug>SnipRun:normal! j<CR>', { silent = true })
+    vim.api.nvim_set_keymap('n', '<leader>x', '<Plug>SnipRunOperator<cmd>normal! j<CR>', { silent = true })
     vim.api.nvim_set_keymap('n', '<leader>p', '<Plug>SnipClose', { silent = true })
   end,
 }
