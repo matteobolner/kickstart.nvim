@@ -8,6 +8,11 @@ return {
 
   config = function()
     require('sniprun').setup {
+      interpreter_options = {
+        Rust_original = {
+          compiler = 'rustc',
+        },
+      },
       selected_interpreters = { 'Python3_fifo' },
       repl_enable = { 'Python3_fifo' },
       snipruncolors = {
