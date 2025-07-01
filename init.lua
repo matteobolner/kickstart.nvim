@@ -989,4 +989,47 @@ require('lazy').setup({
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
-vim.opt.clipboard = 'unnamedplus'
+--vim.opt.clipboard = 'unnamedplus'
+
+vim.lsp.enable 'nextflow'
+
+vim.lsp.config['nextflow'] = {
+  cmd = { 'java', '-jar', '/home/pelmo/opt/nfls/language-server-all.jar' },
+  filetypes = { 'nextflow', 'nf', 'groovy', 'config' },
+  root_markers = { 'nextflow.config', '.git' },
+  settings = {
+    nextflow = {
+      files = {
+        exclude = { '.git', '.nf-test', 'work' },
+      },
+    },
+  },
+}
+-- LSP keymap bindings
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover Documentation' })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = 'Go to Implementation' })
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename Symbol' })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Find References' })
+
+vim.keymap.set('n', '<leader>d', function()
+  vim.diagnostic.open_float(0, { scope = 'line' })
+end)
+
+-- SNAKEFMT
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { 'Snakefile', '*.smk' },
+  callback = function()
+    vim.bo.filetype = 'snakemake'
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'snakemake',
+  callback = function()
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = 0,
+      command = 'silent! Snakefmt',
+    })
+  end,
+})

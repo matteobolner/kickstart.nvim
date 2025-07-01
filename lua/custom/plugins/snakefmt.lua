@@ -1,0 +1,5 @@
+return {
+  {
+    'matteobolner/snakefmt',
+  },
+}
