@@ -1033,3 +1033,6 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
+--TOGGLETERM
+vim.keymap.set('n', '<leader>a', ':ToggleTerm size=10 dir=. direction=horizontal <CR>', { desc = 'Open terminal' })
