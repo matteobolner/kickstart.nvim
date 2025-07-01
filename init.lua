@@ -1016,6 +1016,9 @@ vim.keymap.set('n', '<leader>d', function()
   vim.diagnostic.open_float(0, { scope = 'line' })
 end)
 
+--SNAKEMAKE HIGHLIGHTING
+vim.opt.foldenable = false --remove folding
+
 -- SNAKEFMT
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { 'Snakefile', '*.smk' },
