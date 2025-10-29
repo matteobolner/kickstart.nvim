@@ -1039,3 +1039,11 @@ vim.api.nvim_create_autocmd('FileType', {
 
 --TOGGLETERM
 vim.keymap.set('n', '<leader>a', ':ToggleTerm size=10 dir=. direction=horizontal <CR>', { desc = 'Open terminal' })
+
+--CSVVIEW
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
+  pattern = { '*.csv', '*.tsv' },
+  callback = function()
+    vim.cmd 'CsvViewToggle display_mode=border'
+  end,
+})
